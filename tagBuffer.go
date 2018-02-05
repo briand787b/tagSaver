@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"fmt"
 )
 
 const (
@@ -33,11 +32,8 @@ func (t *tagBuffer) Add(tag string) error {
 		// make tempSlice to disassociate values
 		// from buffer
 		tempSlice := make([]string, t.Capacity)
-		for i, tag := range t.Tags {
-			tempSlice[i] = tag
-		}
-
-		fmt.Println("about to save tempSlice: ", tempSlice)
+		copy(tempSlice, t.Tags)
+		// fmt.Println("about to save tempSlice: ", tempSlice)
 		go saveTags(tempSlice...)
 
 		// reset index -- no need to zero values
