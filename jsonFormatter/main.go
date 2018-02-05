@@ -81,7 +81,7 @@ func scanDoubleQuotations(data []byte, atEOF bool) (advance int, token []byte, e
 
 		rgxWhiteSpace := regexp.MustCompile(`\s+`)
 		cleansedData := rgxWhiteSpace.ReplaceAll(tag, []byte{})
-		fmt.Println("DEBUG: cleansed data: ", string(cleansedData))
+		// fmt.Println("DEBUG: cleansed data: ", string(cleansedData))
 		return byteRange[1] + 1, cleansedData, nil
 	}
 

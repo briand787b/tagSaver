@@ -31,7 +31,7 @@ func (t *tagBuffer) Add(tag string) error {
 		// send query to database asynchronously
 		// make tempSlice to disassociate values
 		// from buffer
-		tempSlice := make([]string, t.Capacity)
+		tempSlice := make([]string, t.Capacity) // optimize this
 		copy(tempSlice, t.Tags)
 		// fmt.Println("about to save tempSlice: ", tempSlice)
 		go saveTags(tempSlice...)
@@ -51,13 +51,6 @@ func (t *tagBuffer) Save() {
 	if t.Index == 0 {
 		return
 	}
-
-	// var validTags []string
-	// for _, tag := range t.Tags {
-	// 	if tag != "" {
-	// 		validTags = append(validTags, tag)
-	// 	}
-	// }
 
 	go saveTags(t.Tags[:t.Index]...)
 }
