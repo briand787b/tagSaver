@@ -57,6 +57,8 @@ func writeJSONToConn(c net.Conn, wg *sync.WaitGroup, fileName string) {
 		return
 	}
 
+	defer fd.Close()
+
 	scnr := bufio.NewScanner(fd)
 	scnr.Split(scanDoubleQuotations)
 	for scnr.Scan() {
